@@ -347,7 +347,8 @@ function Products() {
                                         border={true}
                                     />
                                 )) : (
-                                    products ? products.map((product) => (
+
+                                    products.length > 0 ? products.map((product) => (
                                         <Product
                                             key={product.id}
                                             settings={product.setting}

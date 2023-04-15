@@ -135,7 +135,7 @@ function HomePage() {
             <div className={cx("list__product--slide")}>
               <Slider {...settings}>
                 {
-                  products ? products.map((product) => (
+                  products.length > 0 ? products.map((product) => (
                     <Product
                       key={product.id}
                       settings={product.setting}
@@ -187,7 +187,7 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings}>
               {
-                products ? products.map((product) => (
+                products.length > 0 ? products.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
@@ -219,7 +219,7 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings} >
               {
-                products ? products.map((product) => (
+                products.length > 0 ? products.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
@@ -261,7 +261,7 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings}>
               {
-                products ? products.map((product) => (
+                products.length > 0 ? products.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
