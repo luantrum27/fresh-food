@@ -1,6 +1,6 @@
 import { Product1, Product10, Product11, Product12, Product13, Product14, Product2, Product3, Product4, Product5, Product6, Product7, Product8, Product9 } from "./assets/img";
 
-export const products = [
+export const dataProducts = [
    {
         'id': 1,
         'qty': 0,

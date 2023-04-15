@@ -10,6 +10,7 @@ import { productsState$ } from '../../redux/selectors'
 import Axios from 'axios'
 import { getProducts } from '../../redux/actions'
 import Product from '../../components/Product'
+import { dataProducts } from '../../products'
 
 const cx = classNames.bind(styles)
 
@@ -345,19 +346,31 @@ function Products() {
                                         product={product}
                                         border={true}
                                     />
-                                )) : products.map(product => (
-                                    <Product
-                                        key={product.id}
-                                        settings={product.setting}
-                                        title={product.title}
-                                        priceCurrent={product.priceCurrent}
-                                        salePercent={product.salePercent}
-                                        image={product.image}
-                                        product={product}
-                                        border={true}
-                                    />
-                                ))
-
+                                )) : (
+                                    products ? products.map((product) => (
+                                        <Product
+                                            key={product.id}
+                                            settings={product.setting}
+                                            title={product.title}
+                                            priceCurrent={product.priceCurrent}
+                                            salePercent={product.salePercent}
+                                            image={product.image}
+                                            product={product}
+                                            border={true}
+                                        />
+                                    )) : dataProducts.map((product) => (
+                                        <Product
+                                            key={product.id}
+                                            settings={product.setting}
+                                            title={product.title}
+                                            priceCurrent={product.priceCurrent}
+                                            salePercent={product.salePercent}
+                                            image={product.image}
+                                            product={product}
+                                            border={true}
+                                        />
+                                    ))
+                                )
                             }
                         </div>
                     </div>

@@ -19,6 +19,7 @@ import { getProducts } from '../../redux/actions'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { dataProducts } from '../../products'
 const cx = classNames.bind(styles)
 function NextArrow(props) {
   return (
@@ -134,7 +135,18 @@ function HomePage() {
             <div className={cx("list__product--slide")}>
               <Slider {...settings}>
                 {
-                  products.map((product) => (
+                  products ? products.map((product) => (
+                    <Product
+                      key={product.id}
+                      settings={product.setting}
+                      title={product.title}
+                      priceCurrent={product.priceCurrent}
+                      salePercent={product.salePercent}
+                      image={product.image}
+                      product={product}
+                      border={true}
+                    />
+                  )) : dataProducts.map((product) => (
                     <Product
                       key={product.id}
                       settings={product.setting}
@@ -175,7 +187,18 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings}>
               {
-                products.map((product) => (
+                products ? products.map((product) => (
+                  <Product
+                    key={product.id}
+                    settings={product.setting}
+                    title={product.title}
+                    priceCurrent={product.priceCurrent}
+                    salePercent={product.salePercent}
+                    image={product.image}
+                    product={product}
+                    border={true}
+                  />
+                )) : dataProducts.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
@@ -196,7 +219,18 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings} >
               {
-                products.map((product) => (
+                products ? products.map((product) => (
+                  <Product
+                    key={product.id}
+                    settings={product.setting}
+                    title={product.title}
+                    priceCurrent={product.priceCurrent}
+                    salePercent={product.salePercent}
+                    image={product.image}
+                    product={product}
+                    border={true}
+                  />
+                )) : dataProducts.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
@@ -227,7 +261,18 @@ function HomePage() {
           <div className={cx("list__product--slide")}>
             <Slider {...settings}>
               {
-                products.map((product) => (
+                products ? products.map((product) => (
+                  <Product
+                    key={product.id}
+                    settings={product.setting}
+                    title={product.title}
+                    priceCurrent={product.priceCurrent}
+                    salePercent={product.salePercent}
+                    image={product.image}
+                    product={product}
+                    border={true}
+                  />
+                )) : dataProducts.map((product) => (
                   <Product
                     key={product.id}
                     settings={product.setting}
