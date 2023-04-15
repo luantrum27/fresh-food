@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Wishlist.module.scss'
 import classNames from 'classnames/bind'
-import { products } from '../../../products'
+import { dataProducts } from '../../../products'
 import Product from '../../Product'
 const cx = classNames.bind(styles)
 
@@ -11,7 +11,7 @@ function WishList() {
             <h1>Danh sách yêu thích</h1>
             <div className={cx('wishlistWrapper')}>
                 {
-                    products.map((product) => (
+                    dataProducts.map((product) => (
                         <Product
                             key={product.id}
                             settings={product.setting}

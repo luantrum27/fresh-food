@@ -5,7 +5,6 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { Link, useParams } from 'react-router-dom';
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
-import { products } from '../../products';
 import Note from '../../components/Note';
 import Axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
@@ -13,6 +12,7 @@ import io from "socket.io-client";
 import Vector from '../../assets/img/Vector.png';
 import Send from '../../assets/img/Send.png';
 import Product from '../../components/Product';
+import { dataProducts } from '../../products';
 const cx = classNames.bind(styles);
 
 let socket;
@@ -106,7 +106,7 @@ function ProductPage() {
                 <div className={cx('ProductPage__image--leftImage')}>
                   <ul className={cx('ProductPage__image--leftImageList')} >
                     {
-                      products.map((product, index) => (
+                      dataProducts.map((product, index) => (
                         <li key={index} >
                           <img src={product?.image} alt={product?.title} />
                         </li>
@@ -254,7 +254,7 @@ function ProductPage() {
                 <div className={cx('RelatedProducts__list')} style={{ marginLeft: '-30px' }}>
                   <ul className={cx('productList')}>
                     {
-                      products.map((product) => (
+                      dataProducts.map((product) => (
                         <Product
                           key={product.id}
                           settings={product.setting}
