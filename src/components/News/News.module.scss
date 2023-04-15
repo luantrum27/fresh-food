@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.center {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.new {
+    max-width: 305px;
+    overflow: hidden;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    .new__image {
+        overflow: hidden;
+        img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+            transition: all ease-in-out 0.2s;
+        }
+    }
+    .new__information {
+        padding: 20px;
+        position: absolute;
+        color: white;
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.65) 0, transparent);
+
+        h2 {
+            color: white;
+        }
+    }
+
+    &:hover {
+        .new__image {
+            img {
+                transition: all ease-in-out 0.2s;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
