@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from './Products.module.scss'
 import Navbar from '../../components/Navbar'
@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productsState$ } from '../../redux/selectors'
 import Axios from 'axios'
 import { getProducts } from '../../redux/actions'
-import Product from '../../components/Product'
 import { dataProducts } from '../../products'
+import PaginatedItems from '../../components/PaginatedItems'
+import { FaFilter, FaRegWindowClose } from 'react-icons/fa'
 
 const cx = classNames.bind(styles)
 
@@ -18,6 +19,7 @@ let arr = []
 let query = '';
 
 function Products() {
+    const [toggleFilter, setToggleFilter] = useState(false)
     const dispatch = useDispatch();
     const [active, setActive] = React.useState('');
     const [orderBy, setOrderBy] = React.useState('');
@@ -86,10 +88,10 @@ function Products() {
             <Navbar />
             <Section item={'Tất cả sản phẩm'} />
             <div className={cx('products__main')}>
-                <div className={cx('products__main--container')}>
-                    <div className={cx('left', 'left-content', 'col-lg-3', 'col-md-3', '_sidebarCart-sticky')}>
-                        <div id='column-left' className={cx('left-column', 'compliance')}>
-                            <div className={cx('articale-dm', 'collection-category', 'product_category')} id='product_category--1'>
+                <div className={cx(['container', 'products-main__container'])}>
+                    <div className={cx(['left', 'left-content', '_sidebarCart-sticky', toggleFilter && 'left--toggle'])}>
+                        <div id='column-left' className={cx(['left-column', 'compliance', 'column-left'])}>
+                            <div className={cx(['articale-dm', 'collection-category', 'product_category', 'product_category--1'])} id='product_category--1'>
                                 <div className={cx('aside-title')}>Danh mục</div>
                                 <div className={cx('aside-content')}>
                                     <ul className={cx('navbar-pills', 'nav-category')}>
@@ -312,7 +314,7 @@ function Products() {
                             </div>
                         </div>
                     </div>
-                    <div className={cx('category-products', 'products', 'category-products-grids', 'clearfix')} style={{ marginLeft: '30px' }}>
+                    <div className={cx('category-products', 'products', 'category-products-grids', 'clearfix')}>
                         <div className={cx('sort-cate', 'clearfix')}>
                             <div className={cx('sort-cate-left')} id="sort-by">
                                 <h3 className={cx('nd-titles')}>
@@ -333,48 +335,15 @@ function Products() {
                                 </ul>
                             </div>
                         </div>
-                        <div className={cx('products__main--list')}>
-                            {
-                                orderProducts.length > 0 ? orderProducts.map(product => (
-                                    <Product
-                                        key={product.id}
-                                        settings={product.setting}
-                                        title={product.title}
-                                        priceCurrent={product.priceCurrent}
-                                        salePercent={product.salePercent}
-                                        image={product.image}
-                                        product={product}
-                                        border={true}
-                                    />
-                                )) : (
-
-                                    products.length > 0 ? products.map((product) => (
-                                        <Product
-                                            key={product.id}
-                                            settings={product.setting}
-                                            title={product.title}
-                                            priceCurrent={product.priceCurrent}
-                                            salePercent={product.salePercent}
-                                            image={product.image}
-                                            product={product}
-                                            border={true}
-                                        />
-                                    )) : dataProducts.map((product) => (
-                                        <Product
-                                            key={product.id}
-                                            settings={product.setting}
-                                            title={product.title}
-                                            priceCurrent={product.priceCurrent}
-                                            salePercent={product.salePercent}
-                                            image={product.image}
-                                            product={product}
-                                            border={true}
-                                        />
-                                    ))
-                                )
-                            }
+                        <div className={cx('')}>
+                            <PaginatedItems data={dataProducts} />
                         </div>
+                        <div className={cx(`${toggleFilter && 'overlay'}`)} onClick={() => setToggleFilter(false)}></div>
                     </div>
+                </div>
+                <div className={cx([toggleFilter ? 'close-icon' : 'filter-icon'])} onClick={() => toggleFilter ? setToggleFilter(false) : setToggleFilter(true)}>
+                    {toggleFilter ? <FaRegWindowClose />
+                        : <FaFilter />}
                 </div>
             </div>
             <Footer />

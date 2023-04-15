@@ -29,3 +29,34 @@ code {
 .slick-track {
   width: 10000px !important;
 }
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.pagination .page-num {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 100rem;
+  font-weight: 400;
+  color: #3BA66B;
+
+}
+
+
+.pagination .selected {
+  background-color: #3BA66B;
+  color: #fff;
+  scale: 1.25;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

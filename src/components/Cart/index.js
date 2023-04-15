@@ -3,7 +3,7 @@ import styles from './Cart.module.scss'
 import classNames from 'classnames/bind'
 import { FaTimes } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { getShoppingCart, hideModalCart  } from '../../redux/actions'
+import { getShoppingCart, hideModalCart } from '../../redux/actions'
 import CartProduct from './CartProduct'
 import { shoppingCartState$ } from '../../redux/selectors'
 import { Link } from 'react-router-dom'
@@ -18,10 +18,8 @@ function Cart() {
     dispatch(hideModalCart())
   }, [dispatch])
 
-
-  
   React.useEffect(() => {
-    dispatch(getShoppingCart.getShoppingCartRequest({ userId: currentUser.id}));
+    dispatch(getShoppingCart.getShoppingCartRequest({ userId: currentUser.id }));
   }, [dispatch])
 
   const shoppingCart = useSelector(shoppingCartState$);

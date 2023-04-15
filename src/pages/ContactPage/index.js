@@ -36,10 +36,10 @@ function ContactPage() {
         <div>
             <Navbar />
             <Section item={'Liên hệ'} />
-            <div style={{ width: '80%', margin: '0 auto' }}>
+            <div className={cx('container')}>
                 <iframe src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.6619189807493!2d108.24768071468287!3d15.979022188936652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142108f7ce7d251%3A0xbabf10f9b837c321!2zMTIzIE5ndXnhu4VuIE1pbmggQ2jDonUsIEhvw6AgSOG6o2ksIE5nxakgSMOgbmggU8ahbiwgxJDDoCBO4bq1bmcgNTUwMDAwLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1670179866072!5m2!1sen!2s"} width="100%" height="450" style={{ border: "0;", margin: '0 auto' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '50px' }}>
-                    <div className={cx('col-lg-4', 'col-md-6', 'col-sm-12', 'leave-your-message', 'order-1', 'order-md-2')} style={{ width: '48%' }}>
+                <div className={cx('contact__wrapper')} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '50px' }}>
+                    <div className={cx(['col-lg-4', 'col-md-6', 'col-sm-12', 'leave-your-message', 'order-1', 'order-md-2', 'contact__information'])} style={{ width: '48%' }}>
                         <h3>Thông tin liên hệ</h3>
                         <p className={cx('p-bottom')}>
                             Website thương mại điện tử S.Fresh do S Group là đơn vị chủ quản, chịu trách nhiệm và thực hiện các giao dịch liên quan mua sắm sản phẩm hàng hoá tiêu dùng thiết yếu.
@@ -63,7 +63,7 @@ function ContactPage() {
                             </p>
                         </div>
                     </div>
-                    <form style={{ width: '48%' }}>
+                    <form style={{ width: '48%' }} className={cx('contact__form')}>
                         {
                             success && <p className={cx("form-newsletter__notification")}><div className={cx("alert", "alert-success")} role="alert">Cảm ơn bạn đã liên hệ với chúng tôi. Chúng tôi sẽ trả lời bạn sớm nhất có thể.</div></p>
                         }

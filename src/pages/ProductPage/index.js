@@ -13,6 +13,7 @@ import Vector from '../../assets/img/Vector.png';
 import Send from '../../assets/img/Send.png';
 import Product from '../../components/Product';
 import { dataProducts } from '../../products';
+import PaginatedItems from '../../components/PaginatedItems';
 const cx = classNames.bind(styles);
 
 let socket;
@@ -40,16 +41,17 @@ function ProductPage() {
       setSlide(prev => prev - 1);
     }
   }
+  const desStr = "Dâu tây (danh pháp khoa học: Fragaria) hay còn gọi là dâu đất là một chi thực vật hạt kín và loài thực vật có hoa thuộc họ Hoa hồng (Rosaceae) cho quả được nhiều người ưa chuộng. Dâu tây xuất xứ từ châu Mỹ và được các nhà làm vườn châu Âu cho lai tạo vào thế kỷ 18 để tạo nên giống dâu tây được trồng rộng rãi hiện nay. Loài này được (Weston) Duchesne miêu tả khoa học đầu tiên năm 1788 Dâu tây được trồng lấy trái ở vùng ôn đới.Với mùi thơm hấp dẫn cùng vị dâu ngọt lẫn chua nên dâu tây được ưa chuộng. Ở Việt Nam, khí hậu mát mẻ của miền núi Đà Lạt là môi trường thích hợp với việc canh tác dâu nên loại trái cây này được xem là đặc sản của vùng cao nguyên nơi đây."
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const ENDPOINT = "http://localhost:5000";
   const [idProduct, setIdProduct] = React.useState();
-  const [image, setImage] = React.useState();
-  const [priceCurrent, setPriceCurrent] = React.useState();
+  const [image, setImage] = React.useState(dataProducts[0].image);
+  const [priceCurrent, setPriceCurrent] = React.useState(dataProducts[0].priceCurrent);
   const [priceCost, setPriceCost] = React.useState();
-  const [title, setTitle] = React.useState();
-  const [description, setDescription] = React.useState();
-  const [salePercent, setSalePercent] = React.useState();
-  const [qty, setQty] = React.useState();
+  const [title, setTitle] = React.useState(dataProducts[0].title);
+  const [description, setDescription] = React.useState(desStr);
+  const [salePercent, setSalePercent] = React.useState(dataProducts[0].salePercent);
+  const [qty, setQty] = React.useState(dataProducts[0].qty);
   const [messages, setMessages] = React.useState([]);
   const [message, setMessage] = React.useState('');
 
@@ -69,9 +71,11 @@ function ProductPage() {
     });
   }, [id]);
   React.useEffect(() => {
-    Axios.get('http://localhost:5000/products/' + id).then((res) => {
-      setData(res.data[0])
-    })
+    // Axios.get('http://localhost:5000/products/' + id).then((res) => {
+    //   setData(res.data[0])
+    // })
+    const newProduct = dataProducts.filter((item) => item.id == id);
+    setData(newProduct[0])
   }, [id]);
   React.useEffect(() => {
     Axios.get('http://localhost:5000/comments/' + id).then((res) => {
@@ -94,36 +98,33 @@ function ProductPage() {
   return (
     <div className={cx('ProductPage')}>
       <Navbar />
-      <Note />
-      <div className={cx('ProductPage__content')}>
-        <div className={cx('ProductPage__content--container')}>
-          <div className={cx('ProductPage__image')}>
-            <div className={cx('ProductPage__image--container')}>
-              <div className={cx('ProductPage__image--left')}>
-                <div className={cx('ProductPage__image--leftIcon')} onClick={handleSlideToTop}>
-                  <IoIosArrowUp />
-                </div>
-                <div className={cx('ProductPage__image--leftImage')}>
-                  <ul className={cx('ProductPage__image--leftImageList')} >
-                    {
-                      dataProducts.map((product, index) => (
-                        <li key={index} >
-                          <img src={product?.image} alt={product?.title} />
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </div>
-                <div className={cx('ProductPage__image--leftIcon')}>
-                  <IoIosArrowDown />
-                </div>
-
+      <Note name={title} />
+      <div className={cx(['ProductPage__content--container', 'container'])}>
+        <div className={cx('ProductPage-details')}>
+          <div className={cx('ProductPage__image--container')}>
+            <div className={cx('ProductPage__image--left')}>
+              <div className={cx(['ProductPage__image--leftIcon'])} onClick={handleSlideToTop}>
+                <IoIosArrowUp />
               </div>
-              <div className={cx('ProductPage__image--right')}>
-                <div className={cx('ProductPage__image--rightImage')}>
-                  <img src={image} alt='' />
-                </div>
+              <div className={cx('ProductPage__image--leftImage')}>
+                <ul className={cx('ProductPage__image--leftImageList')} >
+                  {
+                    dataProducts.map((product, index) => (
+                      index < 4 && <li key={index} >
+                        <img src={product?.image} alt={product?.title} />
+                      </li>
+                    ))
+                  }
+                </ul>
               </div>
+              <div className={cx('ProductPage__image--leftIcon')}>
+                <IoIosArrowDown />
+              </div>
+            </div>
+          </div>
+          <div className={cx('ProductPage__image--right')}>
+            <div className={cx('product-image')}>
+              <img src={image} alt='' />
             </div>
           </div>
           <div className={cx('ProductPage__details')}>
@@ -251,23 +252,8 @@ function ProductPage() {
                 <div className={cx('RelatedProducts__title')}>
                   <Link title='Sản phẩm liên quan' to={''}>Sản phẩm liên quan</Link>
                 </div>
-                <div className={cx('RelatedProducts__list')} style={{ marginLeft: '-30px' }}>
-                  <ul className={cx('productList')}>
-                    {
-                      dataProducts.map((product) => (
-                        <Product
-                          key={product.id}
-                          settings={product.setting}
-                          title={product.title}
-                          priceCurrent={product.priceCurrent}
-                          salePercent={product.salePercent}
-                          image={product.image}
-                          product={product}
-                          border={true}
-                        />
-                      ))
-                    }
-                  </ul>
+                <div className={cx('product__paginated')}>
+                  <PaginatedItems data={dataProducts} itemPerPage={4} />
                 </div>
               </div>
             </div>

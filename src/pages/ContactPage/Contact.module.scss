@@ -1,5 +1,5 @@
 .d-none {
-    display: none!important;
+    display: none !important;
 }
 
 .page-contacts .leave-your-message h3 {
@@ -53,4 +53,16 @@
     color: #0f5132;
     background-color: #d1e7dd;
     border-color: #badbcc;
+}
+
+@media (max-width: 640px) {
+    .contact__wrapper {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        .contact__information,
+        .contact__form {
+            width: 100% !important;
+        }
+    }
 }
