@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productsState$ } from '../../redux/selectors'
 import Axios from 'axios'
 import { getProducts } from '../../redux/actions'
-import { dataProducts } from '../../products'
 import PaginatedItems from '../../components/PaginatedItems'
 import { FaFilter, FaRegWindowClose } from 'react-icons/fa'
+import { dataProducts } from '../../db/products'
 
 const cx = classNames.bind(styles)
 

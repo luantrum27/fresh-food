@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import Product from '../../components/Product'
 import { useSelector } from 'react-redux'
 import { searchState$, keyState$ } from '../../redux/selectors'
+import { dataProducts } from '../../db/products'
+import PaginatedItems from '../../components/PaginatedItems'
 const cx = classNames.bind(styles)
 
 function Search() {
@@ -27,19 +29,8 @@ function Search() {
                     <Link className={cx("news-menu-link", "active")} to="" title="Sản phẩm"><i></i>Sản phẩm</Link>
                     <Link className={cx("news-menu-link")} to="" title="Tin tức"><i></i>Tin tức</Link>
                 </div>
-                <div className={cx("search__wrapper--list")}>
-                    {
-                        products.map(product => (
-                            <Product
-                                settings={true}
-                                title={product.title}
-                                priceCurrent={product.priceCurrent}
-                                salePercent={product.salePercent}
-                                image={product.image}
-                                border={true}
-                            />
-                        ))
-                    }
+                <div style={{ marginTop: '30px' }}>
+                    <PaginatedItems data={dataProducts} itemPerPage={4} />
                 </div>
             </div>
             <Footer />

@@ -1,6 +1,6 @@
-export const modalCartState$ = (state) => state.modalCart ;
-export const modalAdminState$ = (state) => state.modalAdmin ;
-export const changeCartState$ = (state) => state.changeCart ;
+export const modalCartState$ = (state) => state.modalCart;
+export const modalAdminState$ = (state) => state.modalAdmin;
+export const changeCartState$ = (state) => state.changeCart;
 export const productsState$ = (state) => state.products.data;
 export const shoppingCartState$ = (state) => state.shoppingCart.data;
 export const customersState$ = (state) => state.customers.data;
@@ -11,3 +11,4 @@ export const isLoadingOrderState$ = (state) => state.order.isLoading;
 export const loginState$ = (state) => state.login.currentUser;
 export const searchState$ = (state) => state.search.data;
 export const keyState$ = (state) => state.search.key;
+export const sideBarState$ = (state) => state.sidebar;

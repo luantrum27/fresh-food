@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { deleteShoppingCartItem, updateShoppingCartItem } from '../../../redux/actions'
-
+import accounts from '../../../db/account.json'
 
 const cx = classNames.bind(styles)
 
 function CartProduct({ image, title, priceCurrent, salePercent, item, quantity }) {
-    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentUser = JSON.parse(localStorage.getItem('user')) || accounts[0];
     const [qty, setQty] = React.useState(quantity);
 
     const dispatch = useDispatch();

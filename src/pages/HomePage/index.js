@@ -19,7 +19,7 @@ import { getProducts } from '../../redux/actions'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { dataProducts } from '../../products'
+import { dataProducts } from '../../db/products'
 const cx = classNames.bind(styles)
 function NextArrow(props) {
   return (

@@ -19,13 +19,14 @@ function FormSignIn() {
             email: email,
             password: password,
         }
-        Axios.post('http://localhost:5000/accounts/login', newAccount).then((res) => {
-            localStorage.setItem('user', JSON.stringify(res.data));
-            navigate('/');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        // Axios.post('http://localhost:5000/accounts/login', newAccount).then((res) => {
+        //     localStorage.setItem('user', JSON.stringify(res.data));
+        //     navigate('/');
+        // })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
+        navigate('/');
         // dispatch(loginAccount.loginStart(newAccount));
     }
     return (

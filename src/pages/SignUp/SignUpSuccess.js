@@ -5,11 +5,15 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { FaHome } from 'react-icons/fa'
 import { IoIosArrowForward } from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
 function SignUpSuccess() {
+  const location = useLocation();
+  const account = location.state;
+  console.log(account);
+  const navigate = useNavigate();
   return (
     <div className={cx('signUp__success')}>
       <Navbar />
@@ -27,9 +31,9 @@ function SignUpSuccess() {
           <p>Bây giờ bạn có thể sử dụng các quyền lợi của thành viên để tiến hành mua sắm với các tiện ích nâng cao.</p>
           <p>Nếu bạn có bất kỳ câu hỏi nào liên quan đến việc mua sắm online, vui lòng liên hệ với chủ cửa hàng.</p>
           <p>Một email xác nhận đã được gửi tới tài khoản bạn đã đăng ký, nếu không nhận được trong vòng 1 giờ, vui lòng liên hệ với chúng tôi.</p>
-          <Link to={'/account'} className={cx('signUp__success--btn')}>
+          <div onClick={() => navigate('/account', { state: account })} className={cx('signUp__success--btn')}>
             Tiếp tục
-          </Link>
+          </div>
         </div>
       </div>
       <Footer />

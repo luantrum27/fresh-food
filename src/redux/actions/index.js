@@ -101,6 +101,8 @@ export const sendFeedback = createActions({
 
 export const showModalCart = createAction('SHOW_MODAL_CART');
 export const hideModalCart = createAction('HIDE_MODAL_CART');
+export const showSideBar = createAction('SHOW_SIDE_BAR');
+export const hideSideBar = createAction('HIDE_SIDE_BAR');
 export const showModalUpdateProduct = createAction('SHOW_MODAL_UPDATE_PRODUCT');
 export const hideModalUpdateProduct = createAction('HIDE_MODAL_UPDATE_PRODUCT');
 export const showModalDeleteProduct = createAction('SHOW_MODAL_DELETE_PRODUCT');

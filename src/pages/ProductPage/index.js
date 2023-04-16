@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import styles from './ProductPage.module.scss'
 import classNames from 'classnames/bind'
 import Navbar from '../../components/Navbar';
@@ -12,7 +12,7 @@ import io from "socket.io-client";
 import Vector from '../../assets/img/Vector.png';
 import Send from '../../assets/img/Send.png';
 import Product from '../../components/Product';
-import { dataProducts } from '../../products';
+import { dataProducts } from '../../db/products';
 import PaginatedItems from '../../components/PaginatedItems';
 const cx = classNames.bind(styles);
 
@@ -94,6 +94,9 @@ function ProductPage() {
       setMessage("");
     } else alert("empty input");
   };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [id]);
 
   return (
     <div className={cx('ProductPage')}>

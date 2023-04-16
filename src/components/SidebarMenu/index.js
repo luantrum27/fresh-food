@@ -2,17 +2,20 @@ import React from "react";
 import styles from "./SidebarMenu.module.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import { hideSideBar } from "../../redux/actions";
+import { BsFillArrowLeftSquareFill } from 'react-icons/bs'
 
 const cx = classNames.bind(styles);
 
-function SidebarMenu({ showSidebarMenu, setShowSidebarMenu }) {
+function SidebarMenu({ showSidebarMenu, dispatch }) {
+  const handleHideSideBar = React.useCallback(() => {
+    dispatch(hideSideBar())
+  }, [dispatch])
   return (
     <div
-      className={cx("wrapper", showSidebarMenu && "active")}
+      className={cx(["wrapper", showSidebarMenu && "active"])}
       onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setShowSidebarMenu(false);
-        }
+        handleHideSideBar();
       }}
     >
       <div className={cx("inner")}>
@@ -29,18 +32,21 @@ function SidebarMenu({ showSidebarMenu, setShowSidebarMenu }) {
             <Link to="/">Trang chủ</Link>
           </li>
           <li className={cx("menu__item")}>
-            <Link to="/">Giới thiệu</Link>
+            <Link to="/introduce">Giới thiệu</Link>
           </li>
           <li className={cx("menu__item")}>
-            <Link to="/">Sản phẩm</Link>
+            <Link to="/products">Sản phẩm</Link>
           </li>
           <li className={cx("menu__item")}>
-            <Link to="/">Tin tức</Link>
+            <Link to="/news">Tin tức</Link>
           </li>
           <li className={cx("menu__item")}>
-            <Link to="/">Liên hệ</Link>
+            <Link to="/contact">Liên hệ</Link>
           </li>
         </ul>
+      </div>
+      <div className={cx("sidebar-icon--close")} onClick={() => handleHideSideBar()}>
+        <BsFillArrowLeftSquareFill />
       </div>
     </div>
   );

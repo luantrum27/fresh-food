@@ -11,6 +11,7 @@ import feedbacks from './feedbacks';
 import search from './search';
 import order from './order';
 import comments from './comments';
+import sidebar from './sidebar';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
@@ -26,7 +27,8 @@ const reducers = combineReducers({
     feedbacks,
     search,
     order,
-    comments
+    comments,
+    sidebar
 });
 
 const persistConfig = {

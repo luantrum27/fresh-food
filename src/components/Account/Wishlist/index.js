@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Wishlist.module.scss'
 import classNames from 'classnames/bind'
-import { dataProducts } from '../../../products'
-import Product from '../../Product'
+import { dataProducts } from '../../../db/products'
+import PaginatedItems from '../../PaginatedItems'
 const cx = classNames.bind(styles)
 
 function WishList() {
@@ -10,20 +10,7 @@ function WishList() {
         <div className={cx('wishlist')}>
             <h1>Danh sách yêu thích</h1>
             <div className={cx('wishlistWrapper')}>
-                {
-                    dataProducts.map((product) => (
-                        <Product
-                            key={product.id}
-                            settings={product.setting}
-                            title={product.title}
-                            priceCurrent={product.priceCurrent}
-                            salePercent={product.salePercent}
-                            image={product.image}
-                            product={product}
-                            border={true}
-                        />
-                    ))
-                }
+                <PaginatedItems data={dataProducts} itemPerPage={4} />
             </div>
         </div>
     )

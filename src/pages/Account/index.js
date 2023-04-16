@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Account.module.scss'
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { FaHome } from 'react-icons/fa'
@@ -15,6 +15,8 @@ import Newsletter from '../../components/Account/Newsletter'
 const cx = classNames.bind(styles)
 
 function Account({ slug }) {
+    const location = useLocation();
+    const account = location.state
     return (
         <div className={cx('account')}>
             <Navbar />
@@ -58,8 +60,8 @@ function Account({ slug }) {
                         </>
                     ) : ''
                 }
-                
-            
+
+
             </div>
             {
                 slug === 'index' ? <Option /> : <></>
@@ -68,10 +70,10 @@ function Account({ slug }) {
                 slug === 'wishlist' ? <WishList /> : <></>
             }
             {
-                slug === 'password' ? <Password /> : <></>
+                slug === 'password' ? <Password account={account} /> : <></>
             }
             {
-                slug === 'edit' ? <Information /> : <></>
+                slug === 'edit' ? <Information account={account} /> : <></>
             }
             {
                 slug === 'newsletter' ? <Newsletter /> : <></>

@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+
 const cx = classNames.bind(styles)
 
 function FormSignUp() {
@@ -23,10 +24,11 @@ function FormSignUp() {
             'password': password,
         }
 
-        Axios.post('http://localhost:5000/accounts/sign-up',
-            account).then(() => {
-                navigate('/sign-up/success');
-            })
+        // Axios.post('http://localhost:5000/accounts/sign-up',
+        //     account).then(() => {
+        //         navigate('/sign-up/success');
+        //     })
+        navigate('/sign-up/success', { state: account });
     }
 
     return (

@@ -1,0 +1,11 @@
+[
+    {
+        "id": "ac001",
+        "name": "Hoàng Thế Luân",
+        "address": "Thôn Hà Thượng, Xã Gio Châu, Huyện Gio Linh, Tỉnh Quảng Trị",
+        "email": "admin@gmail.com",
+        "password": "htl27062003",
+        "phoneNumber": "0379124695",
+        "admin": true
+    }
+]

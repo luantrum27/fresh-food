@@ -11,9 +11,9 @@ import {
 import { FaUserCircle, FaBars } from "react-icons/fa";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { search, showModalCart } from "../../redux/actions";
+import { search, showModalCart, showSideBar } from "../../redux/actions";
 import { User } from "../../assets/img";
-import { shoppingCartState$ } from "../../redux/selectors";
+import { shoppingCartState$, sideBarState$ } from "../../redux/selectors";
 import SidebarMenu from "../SidebarMenu";
 
 const cx = classNames.bind(styles);
@@ -26,6 +26,11 @@ function Navbar() {
   }, [dispatch])
 
   const [showSidebarMenu, setShowSidebarMenu] = React.useState(false)
+  const isShow = useSelector(sideBarState$).isShow;
+
+  const handleShowSideBar = React.useCallback(() => {
+    dispatch(showSideBar());
+  })
 
   const searchHandler = (e) => {
     setQuery(e.target.value);
@@ -100,9 +105,8 @@ function Navbar() {
                     />
                   </Link>
                 ) : (
-                  <Link to={""}>
+                  <Link to={''}>
                     <FaUserCircle className={cx("nav__user-icon")} />
-                    <FaBars className={cx('nav__bars-icon')} onClick={() => setShowSidebarMenu(true)} />
                   </Link>
                 )}
                 {currentUser ? (
@@ -136,11 +140,14 @@ function Navbar() {
                   </ul>
                 )}
               </li>
+              <li className={cx("navbar__icons--item")} onClick={() => handleShowSideBar()}>
+                <Link to={''} > <FaBars className={cx('nav__bars-icon')} /></Link>
+              </li>
             </ul>
           </div>
         </div>
       </div>
-      <SidebarMenu showSidebarMenu={showSidebarMenu} setShowSidebarMenu={setShowSidebarMenu} />
+      <SidebarMenu showSidebarMenu={isShow} setShowSidebarMenu={setShowSidebarMenu} dispatch={dispatch} />
     </>
   );
 }

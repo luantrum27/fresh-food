@@ -20,7 +20,7 @@ function SignIn() {
                 </div>
             </div>
             <div className={cx('signIn__content')}>
-                <div className={cx('signIn__content--container')}>
+                <div className={cx(['signIn__content--container', 'container'])}>
                     <FormSignIn />
                     <div className={cx('right')}>
                         <h1 className={cx('form__title')}>QUYỀN LỢI THÀNH VIÊN</h1>

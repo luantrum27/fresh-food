@@ -46,12 +46,15 @@ export const INIT_STATE = {
         data: [],
         keyword: ''
     },
-    order: { 
+    order: {
         isLoading: false,
         data: [],
     },
     comments: {
         isLoading: false,
         data: []
+    },
+    sidebar: {
+        isShow: false
     }
 }

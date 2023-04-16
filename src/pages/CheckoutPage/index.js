@@ -4,26 +4,27 @@ import classNames from 'classnames/bind'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import { loginState$, shoppingCartState$ } from '../../redux/selectors'
-import { useDispatch, useSelector } from 'react-redux'
+import { shoppingCartState$ } from '../../redux/selectors'
 
 import Axios from 'axios'
+import { useSelector } from 'react-redux'
+import accounts from '../../db/account.json'
+import productBought from '../../db/bought.json'
 
 
 const cx = classNames.bind(styles)
 
 function CheckoutPage() {
     const navigate = useNavigate();
-    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentUser = JSON.parse(localStorage.getItem('user')) || accounts[0];
     const [isPayment, setIsPayment] = React.useState(false);
     const shoppingCart = useSelector(shoppingCartState$);
     const [customerName, setCustomerName] = React.useState(currentUser.name);
     const [customerEmail, setCustomerEmail] = React.useState(currentUser.email);
     const [customerPhone, setCustomerPhone] = React.useState(currentUser.phoneNumber);
-    const [customerAddress, setCustomerAddress] = React.useState('');
+    const [customerAddress, setCustomerAddress] = React.useState(currentUser.address);
     const [customerNote, setCustomerNote] = React.useState('');
     const [customerPayment, setCustomerPayment] = React.useState('');
-    console.log('shoppingCart: ', shoppingCart);
 
     const handlerOrder = () => {
         const order = {
@@ -35,17 +36,19 @@ function CheckoutPage() {
             payments: customerPayment,
             delivery_address: customerAddress,
         }
-        Axios.post('http://localhost:5000/order/add', order)
-            .then((res) => {
-                navigate('/checkout/success', {state: order});
-            })
-            .catch(error => console.log(error));
+        console.log(order);
+        // Axios.post('http://localhost:5000/order/add', order)
+        //     .then((res) => {
+        //         navigate('/checkout/success', { state: order });
+        //     })
+        //     .catch(error => console.log(error));
+        navigate('/checkout/success', { state: order });
     };
 
     return (
         <div className={cx('CheckoutPage')}>
             <Navbar />
-            <div className={cx('CheckoutPage__wrapper')}>
+            <div className={cx(['CheckoutPage__wrapper', 'container'])}>
                 {
                     isPayment === false ? (
                         <div className={cx('CheckoutPage__main')}>
@@ -57,7 +60,7 @@ function CheckoutPage() {
                                         setCustomerName(e.target.value)
                                     }} />
                                 </div>
-                                <div class="mb-3" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <div class="mb-3" className={cx('input-group')}>
                                     <div className={cx('col')}>
                                         <label for="emailInput" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="emailInput" placeholder="Email" value={customerEmail} onChange={(e) => {
@@ -89,7 +92,7 @@ function CheckoutPage() {
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                                     <label class="form-check-label" for="exampleCheck1">Yêu cầu in hóa đơn GTGT</label>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div className={cx('input-group')}>
                                     <Link to={'/'} class='btn btn-secondary' style={{ cursor: 'pointer' }}>Thoát</Link>
                                     <button type="submit" onClick={() => setIsPayment(!isPayment)} class="btn btn-primary" style={{ backgroundColor: '#000', border: '#000' }}>Tiếp tục đến phương thức thanh toán</button>
                                 </div>
@@ -163,7 +166,7 @@ function CheckoutPage() {
                             <div className={cx('CheckoutPage__main--content')}>
                                 <div className={cx('CheckoutPage__main--footer')}>
                                     <div className={cx('step-footer-previous-link', 'btn-step-back')} onClick={() => setIsPayment(!isPayment)}><i class="fa-solid fa-backward"></i> {" Quay lại thông tin giao hàng"} </div>
-                                    <Link to={''} className={cx('step-footer-continue-btn', 'btn')} onClick={() => handlerOrder()}> Đặt hàng </Link>
+                                    <Link to={'/checkout/success'} className={cx('step-footer-continue-btn', 'btn')} onClick={() => handlerOrder()}> Đặt hàng </Link>
                                 </div>
                             </div>
                         </div>
@@ -174,22 +177,22 @@ function CheckoutPage() {
                     <div className={cx('CheckoutPage__sidebar-products')}>
                         <ul className={cx('shoppingCart__list')} style={{ height: '200px', overflowY: 'scroll' }}>
                             {
-                                shoppingCart.map((item, index) => (
+                                productBought.map((item, index) => (
                                     <li>
                                         <div className={cx('CheckoutPage__sidebar-media')}>
                                             <div>
-                                                <img src={item.image} alt={item.title} />
+                                                <img src={item.productImage} alt={item.productTitle} />
                                             </div>
-                                            <p>{item.title}</p>
+                                            <p>{item.productTitle}</p>
                                         </div>
-                                        <p>{item.priceCurrent}đ</p>
+                                        <p>{item.productPriceCurrent}đ</p>
                                     </li>
                                 ))
                             }
                         </ul>
                         <div className={cx('line')}></div>
-                        <div class="mb-3" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%', margin: '20px auto' }}>
-                            <input type="text" class="form-control" id="saleCode" placeholder="Nhập mã giảm giá" style={{ width: '280px' }} />
+                        <div class="mb-3" className={cx(['input-group', 'no-reserse'])}>
+                            <input type="text" class="form-control" id="saleCode" placeholder="Nhập mã giảm giá" style={{ maxWidth: '280px' }} />
                             <div class="btn btn-primary" style={{ backgroundColor: '#000', border: '#000' }}>Áp dụng</div>
                         </div>
                         <div className={cx('line')}></div>

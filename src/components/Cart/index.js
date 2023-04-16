@@ -7,20 +7,22 @@ import { getShoppingCart, hideModalCart } from '../../redux/actions'
 import CartProduct from './CartProduct'
 import { shoppingCartState$ } from '../../redux/selectors'
 import { Link } from 'react-router-dom'
+import accounts from '../../db/account.json'
+import productBought from '../../db/bought.json'
 
 
 const cx = classNames.bind(styles)
 
 function Cart() {
   const dispatch = useDispatch();
-  const currentUser = JSON.parse(localStorage.getItem('user'))
+  const currentUser = JSON.parse(localStorage.getItem('user')) || accounts[0]
   const hideModal = React.useCallback(() => {
     dispatch(hideModalCart())
   }, [dispatch])
 
   React.useEffect(() => {
     dispatch(getShoppingCart.getShoppingCartRequest({ userId: currentUser.id }));
-  }, [dispatch])
+  }, [currentUser.id, dispatch])
 
   const shoppingCart = useSelector(shoppingCartState$);
 
@@ -33,7 +35,7 @@ function Cart() {
           <FaTimes onClick={hideModal} />
         </div>
         {
-          shoppingCart.length <= 0 && (
+          productBought.length <= 0 && (
             <>
               <div className={cx('cart__container--image')}>
                 <img src={'https://sfresh.w2.exdomain.net/catalog/view/theme/sfresh/image/mobile-shopping.svg'} alt='cartImage' />
@@ -45,11 +47,11 @@ function Cart() {
           )
         }
         {
-          shoppingCart.length > 0 && (
+          productBought.length > 0 && (
             <>
               <ul className={cx('cart__list')}>
                 {
-                  shoppingCart.map(item => (
+                  productBought.map(item => (
                     <CartProduct
                       image={item.productImage}
                       title={item.productTitle}
