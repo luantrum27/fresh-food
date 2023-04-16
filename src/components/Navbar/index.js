@@ -43,12 +43,12 @@ function Navbar() {
     <>
       <div className={cx("navbar")}>
         <div className={cx(["navbar__container", 'container'])}>
-          <div className={cx("navbar__logo")}>
+          <Link to={'/'} className={cx("navbar__logo")}>
             <img
               src="https://sfresh.w2.exdomain.net/image/catalog/sfresh/logo/logo.png"
               alt="S.Fresh"
             />
-          </div>
+          </Link>
           <ul className={cx("navbar__categories")}>
             <li className={cx("navbar__categories--item")}>
               <Link to={"/"}>Trang chủ</Link>

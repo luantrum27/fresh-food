@@ -20,10 +20,10 @@ function SidebarMenu({ showSidebarMenu, dispatch }) {
     >
       <div className={cx("inner")}>
         <div className={cx("header")}>
-          <Link className={cx("header__signin")} to="/">
+          <Link className={cx("header__signin")} to="/sign-in">
             Đăng nhập
           </Link>
-          <Link className={cx("header__signup")} to="/">
+          <Link className={cx("header__signup")} to="/sign-up">
             Đăng ký
           </Link>
         </div>
